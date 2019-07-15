@@ -18,37 +18,34 @@ class Median extends Component {
     sortNumbers = () => {
         this.setState({ numbers: this.state.numbers.sort((a, b) => a - b)})
     }
-    
-    componentDidMount = () => {
-        /* const longitud = randomstring.generate({
-            length: 1,
-            charset: 'numeric'
-        });
-        let numbers = [];
-        for (let i = 0; i < longitud; i++) {
-            numbers.push(parseInt(randomstring.generate({
-                length: 1,
-                charset: 'numeric'
-            })))          
-        }
-        this.setState({ numbers }); */
+
+    pushNumberOfArray = (number) => {
+        this.state.numbers.push(parseInt(number));
+        this.setState({ numbers: this.state.numbers });
+        return; 
     }
-    
-    addNumber = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if(!err) {
-                this.state.numbers.push(parseInt(values.number))
-                this.setState({ numbers: this.state.numbers })
-                this.props.form.setFieldsValue({ 'number': '' })
-                this.getMedian()
-            }
+
+    addNumber = (event) => {
+        event.preventDefault();
+        this.props.form.validateFields()
+        .then(values => {
+            this.pushNumberOfArray(values.number);
+            this.props.form.setFieldsValue({ 'number': '' })
+            this.getMedian()
+        })
+        .catch((err) => {
+            // Show errors in form
+            console.log(err);
         });
     };
 
-    onChange = (e, number, callback) => {
+    dataIsNumber = () => {
         const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
-        if ((!Number.isNaN(number) && reg.test(number)) || number === '' || number === '-') {
+        return (!Number.isNaN(number) && reg.test(number)) || number === '' || number === '-';
+    }
+
+    onChangeNumber = (event, number, callback) => {
+        if (this.dataIsNumber(number)) {
             callback()
         } else {
             this.props.form.setFieldsValue({ 'number': '' })
@@ -56,19 +53,24 @@ class Median extends Component {
         }
     };
 
-    deleteNumber = (e) => {
-        this.state.numbers.splice(e, 1);
-        this.setState({ numbers: this.state.numbers })
-        if(!this.state.numbers.length) {
-            this.setState({ text: 'Wrong!' });
-        } else {
+    spliceNumberOfArray = (position) => {
+        this.state.numbers.splice(position, 1);
+        this.setState({ numbers: this.state.numbers });
+        return this.state.numbers; 
+    }
+
+    deleteNumber = (position) => {
+        let numbers = this.spliceNumberOfArray(position);
+        if(numbers.length) {
             this.setState({ text: '' });
+        } else {
+            this.setState({ text: 'Wrong!', median: '' });
         }
         this.getMedian()
     }
 
     getMedian = () => {
-        let numbers = this.state.numbers;
+        let { numbers } = this.state;
         if(numbers.length) {
             this.sortNumbers();
             let middle, median;
@@ -100,7 +102,7 @@ class Median extends Component {
                                                 message: 'Input something!',
                                             },
                                             {
-                                                validator: this.onChange
+                                                validator: this.onChangeNumber
                                             }
                                         ],
                                     })(<Input
