@@ -15,16 +15,6 @@ class Median extends Component {
         }
     }
 
-    sortNumbers = () => {
-        this.setState({ numbers: this.state.numbers.sort((a, b) => a - b)})
-    }
-
-    pushNumberOfArray = (number) => {
-        this.state.numbers.push(parseInt(number));
-        this.setState({ numbers: this.state.numbers });
-        return; 
-    }
-
     addNumber = (event) => {
         event.preventDefault();
         this.props.form.validateFields()
@@ -38,11 +28,13 @@ class Median extends Component {
             console.log(err);
         });
     };
-
-    dataIsNumber = () => {
-        const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
-        return (!Number.isNaN(number) && reg.test(number)) || number === '' || number === '-';
+    
+    pushNumberOfArray = (number) => {
+        this.state.numbers.push(parseInt(number));
+        this.setState({ numbers: this.state.numbers });
+        return; 
     }
+    
 
     onChangeNumber = (event, number, callback) => {
         if (this.dataIsNumber(number)) {
@@ -51,14 +43,13 @@ class Median extends Component {
             this.props.form.setFieldsValue({ 'number': '' })
             callback()
         }
-    };
-
-    spliceNumberOfArray = (position) => {
-        this.state.numbers.splice(position, 1);
-        this.setState({ numbers: this.state.numbers });
-        return this.state.numbers; 
     }
-
+    
+    dataIsNumber = (number) => {
+        const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
+        return (!Number.isNaN(number) && reg.test(number)) || number === '' || number === '-';
+    }
+    
     deleteNumber = (position) => {
         let numbers = this.spliceNumberOfArray(position);
         if(numbers.length) {
@@ -67,6 +58,16 @@ class Median extends Component {
             this.setState({ text: 'Wrong!', median: '' });
         }
         this.getMedian()
+    }
+    
+    spliceNumberOfArray = (position) => {
+        this.state.numbers.splice(position, 1);
+        this.setState({ numbers: this.state.numbers });
+        return this.state.numbers; 
+    }
+
+    sortNumbers = () => {
+        this.setState({ numbers: this.state.numbers.sort((a, b) => a - b)})
     }
 
     getMedian = () => {
@@ -85,7 +86,7 @@ class Median extends Component {
             this.setState({ median });
         }
     }
-
+    
     render() {
         const { getFieldDecorator } = this.props.form;
         return (

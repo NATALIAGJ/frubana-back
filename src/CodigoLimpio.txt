@@ -1,0 +1,61 @@
+¿Cuáles serian las cualidades para un código limpio?
+1. Variables 
+1.1 Utiliza nombres significativos y pronunciables para las variables
+1.2 Utiliza nombres buscables
+1.3. Utiliza variables explicativas
+1.4. Evitar el mapeo mental
+1.5. No incluyas contexto innecesario
+1.6. Utiliza argumentos predefinidos en vez de utilizar condicionales
+2. Funciones
+2.1 Argumentos de funciones (2 o menos idealmente)
+2.2 Las funciones deben tener una sola responsabilidad 
+2.3 Los nombres de las funciones deben explicar lo que hacen
+2.4 Las funciones deben tener solo un nivel de abstracción
+2.5 Eliminar el código duplicado
+2.6 Crear objetos predefinidos con Object.assign
+2.7 Evitar que las funciones produzcan efectos extras
+2.8 No intentes cambiar las funciones globales
+2.9 Favorece a la programación funcional en vez de la programación imperativa
+2.10 Encapsular los condicionales
+2.11 Evitar los condicionales negativos
+2.12 Evitar los condicionales
+2.13 Evitar la comprobación de tipos
+2.14 No optimices demasiado
+2.15 Eliminar el código muerto
+3. Objetos y estructuras de data
+3.1 Utiliza getters y setters
+3.2 Haz que los objetos tengan miembros privados
+4. Clases
+4.1 ES6 clases 
+4.2 Utiliza la agregación de métodos
+4.3 Prefiere composición en vez de la herencia
+5. SOLID
+5.1 El principio único de responsabilidad (SRP)
+5.2 Principio de abierto/cerrado (OCP)
+5.3 El principio de sustitución de Liskov (LSP)
+5.4 El principio de segregación en cuanto a los interfaces (ISP)
+5.5 El principio de la inversión de las dependencias (DIP)
+6 Pruebas
+6.1 Un solo concepto para cada prueba
+7. Concurrencia
+7.1 Utiliza las promesas y no utilices los callbacks
+7.2 Async/Await son aún más limpios que las Promesas
+8. Resolver los errores
+8.1 No les ignores a los errores pillados
+8.2 No le ignores a las promesas rechazadas
+9. Formatear
+9.1 Utiliza capitalización consistente
+9.2 Los llamadores y llamantes de las funciones deben existir cercas
+10. Comentarios
+10.1 Solamente comenta las cosas que tienen lógico complejo.
+10.2 No dejes código inutilizado en tus archivos
+10.3 No escribas comentarios de jornada
+10.4 Evitar los marcadores posicionales
+
+Las carasteristicas anteriormente mencionadas, no las uso al 100%; pero son aspectos que poco a poco va mejorando mi código
+Fuente: https://github.com/andersontr15/clean-code-javascript-es
+
+
+
+
+https://github.com/andersontr15/clean-code-javascript-es
